@@ -121,39 +121,6 @@
         }
       }
 
-### 增加个人信息 [POST] /users
-+ Description
-    + [MUST] authenticated
-    + [MUST] 
-+ Request (application/json)
-
-      {
-    	 "data":{
-    		"wechatId":"oK9PMsxEZTJgUoG53gYJsdu1UQIE",
-    		"phoneNumber":"18810649832",
-    		"identity":"1",
-    		"nickname":"青城",
-    		"realName":"张三",
-    		"sex":0,
-    		"birthday":"1967-01-01",
-    		"pregnancyStage":1,
-    		"pregnancyDate":"2017-06-22",
-    		"address":"北京市丰台区云谷创业园",
-    		"avatar":"http://static.mifanxing.com/iyyren/image/201806/06/1638/347865732702420992.jpg",
-    		"jobTitle":"中级教练",
-    		"remarks":"个人同行业后台已经还特意与金太阳",
-    		"photo":"http://static.mifanxing.com/iyyren/image/201803/15/1453/317761140065189888.jpg"
-    	 }
-      }
-+ Response (application/json)
-    
-      {
-        "data": {
-            "id": 3,
-            "type": "user"
-        }
-      }
-
 ### 修改个人信息[PUTCH]/users/{id}
 + Description
     + [MUST] authenticated
@@ -180,12 +147,6 @@
       }
 
 + Response 200
-
-### 删除用户 [DELETE] /user/{id}
-+ Description
-    + [MUST] authenticated
-    + [MUST] 
-+ Response 204  
 
 ## 课程服务
 + Data
