@@ -925,6 +925,7 @@
 + Description
     + [MUST] authenticated
     + [MUST] ROLE_ADMIN | ROLE_SUPER_ADMIN
+    + attachmentIds - 为内容图片id（非必填）
 + Request (application/json)
     
       {
@@ -952,6 +953,7 @@
 + Description
     + [MUST] authenticated
     + [MUST] ROLE_ADMIN | ROLE_SUPER_ADMIN
+    + attachmentIds - 为内容图片id（非必填）
 + Request (application/json)
         
       {
@@ -1113,6 +1115,7 @@
 + Description
     + [MUST] authenticated
     + [MUST] ROLE_ADMIN | ROLE_SUPER_ADMIN
+    + attachmentIds - 为内容图片id（非必填）
 + Request (application/json)
     
       {
@@ -1142,6 +1145,7 @@
 + Description
     + [MUST] authenticated
     + [MUST] ROLE_ADMIN | ROLE_SUPER_ADMIN
+    + attachmentIds - 为内容图片id（非必填）
 + Request (application/json)
         
       {
@@ -1284,19 +1288,21 @@
 + Description
     + [MUST] authenticated
     + [MUST] ROLE_ADMIN | ROLE_SUPER_ADMIN
+    + attachmentIds - 为内容图片id（非必填）
 + Request (application/json)
     
       {
-    	  "data":{
-    		 "activityTitle":"月子线下活动123",
-    		 "description":"活动描述史蒂芬森123",
-    		 "content":"活动内容是的是的所多123",
-    		 "organizationId":2,
-    		 "stage":1,
-    		 "recommend":1,
-    		 "hasSign":1,
-    		 "thumbnail":"http://static.mifanxing.com/iyyren/image/201806/06/1638/000000.jpg"
-    	 }
+    	"data":{
+    		"activityTitle":"月子线下活动001",
+    		"description":"活动描述史蒂芬森001",
+    		"content":"活动内容是的是的所多001",
+    		"organizationId":2,
+    		"stage":1,
+    		"recommend":1,
+    		"hasSign":1,
+    		"attachmentIds":[1,2],
+    		"thumbnail":"http://static.mifanxing.com/iyyren/image/201806/06/1638/000000.jpg"
+    	}
       }
 
 + Response 200 (application/json)
@@ -1313,19 +1319,21 @@
 + Description
     + [MUST] authenticated
     + [MUST] ROLE_ADMIN | ROLE_SUPER_ADMIN
+    + attachmentIds - 为内容图片id（非必填）
 + Request (application/json)
         
       {
-    	 "data":{
-    		 "activityTitle":"月子线下活动1234",
-    		 "description":"活动描述史蒂芬森1234",
-    		 "content":"活动内容是的是的所多1234",
-    		 "organizationId":2,
-    		 "stage":1,
-    		 "recommend":1,
-    		 "hasSign":1,
-    		 "thumbnail":"http://static.mifanxing.com/iyyren/image/201806/06/1638/000000.jpg"
-    	 }
+    	"data":{
+    		"activityTitle":"月子线下活动002",
+    		"description":"活动描述史蒂芬森001",
+    		"content":"活动内容是的是的所多001",
+    		"organizationId":2,
+    		"stage":1,
+    		"recommend":1,
+    		"hasSign":1,
+    		"attachmentIds":[1,2],
+    		"thumbnail":"http://static.mifanxing.com/iyyren/image/201806/06/1638/000000.jpg"
+    	}
       }
       
 + Response 200 (application/json)
@@ -1896,7 +1904,7 @@
 + Description
     + [MUST] authenticated
     + [MUST] ROLE_ADMIN | ROLE_SUPER_ADMIN
-+ Request (application/json)
++ Request (application/json)（私教课）
     
       {
     	 "data":{
@@ -1909,6 +1917,24 @@
     		 "courseLevelId":3,
     		 "studentId":[25],
     		 "cardId":[41]
+    	 }
+      }
+
++ Request (application/json)（公开课）
+
+      {
+    	 "data":{
+    		 "categoryId":1,
+    		 "mianCoachId":2,
+    		 "assistCoachId":"4",
+    		 "place":1,
+    		 "shopId":2,
+    		 "attendDate":"2019-05-25",
+    		 "beginTime":"2019-05-25 14:51:11",
+    		 "timeLength":15,
+    		 "courseLevelId":3,
+    		 "studentId":[25,27],
+    		 "cardId":[41,42]
     	 }
       }
 
@@ -1947,18 +1973,21 @@
     
       {
         "data": {
-            "category": "公开课",
+            "categoryId": 2,
+            "mianCoachId": 2,
+            "courseLevelId": 3,
+            "nature": 1,
+            "category": "私教课",
             "mianCoach": "白求恩",
             "place": "上门",
-            "organization": "医院1",
-            "shop": "方庄月子门店",
-            "attendDate": "2019-05-20",
-            "beginTime": "14:51",
-            "endTime": "15:06",
+            "attendDate": "2019-05-09",
+            "beginTime": "21:51",
+            "endTime": "22:06",
             "timeLength": 15,
             "courseLevel": "高级",
             "student": [
                 {
+                    "userId": 25,
                     "userName": "李白",
                     "phoneNumber": "17085145711",
                     "cardNumber": "20190425000001"
@@ -1967,7 +1996,7 @@
         }
       }
 
-### 删除 [DELETE] /v1/teacher/attend-classes/{id} 
+### 删除 [DELETE] /admin/attendClass/{id} 
 + Description
     + [MUST] authenticated
     + [MUST] ROLE_ADMIN | ROLE_SUPER_ADMIN
@@ -2677,22 +2706,40 @@
       }
 
 ## 用户管理
-### 用户详情描述 [GET] /users/userCardInfo?userId=1&cardId=4
+### 用户详情描述 [GET] /users/userCardInfo?userId={id}
 + Parameters
   + userId - 用户ID（必填）
   + cardId - 卡ID（非必填）
-  + userId=1&cardId=4（示例）
-
+  + userId=25（示例）
++ Description
+    + userName - 用户名称
+    + phoneNumber - 用户手机号
+    + SalespersonName - 销售教练
+    + sexName - 性别名称
+    + region - 用户所在地区
+    + address - 详细地址
+    + isShow - 用户是否有卡
 + Response 200 (application/json)
 
       {
         "data": {
-            "userName": "海燕",
-            "phoneNumber": "13051638532",
-            "sexName": "女",
-            "address": "北京市丰台区七里庄",
-            "show": true,
-            "salespersonName": "张三1"
+            "userName": "李白",
+            "phoneNumber": "17085145711",
+            "sexName": "男",
+            "region": {
+                "id": 17,
+                "parentId": 13,
+                "regionTitle": "丰台区",
+                "parent": {
+                    "id": 13,
+                    "parentId": 0,
+                    "regionTitle": "北京市"
+                }
+            },
+            "address": "北京市丰台区北大地",
+            "avatar": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKFASdZ7SWviaHbqlp6tEVO5lLkaic3TIs8BBuczkQsWp7Hf1DvW9vyias1owNlEtrEEV45pl84k94gw/0",
+            "salespersonName": "ycl",
+            "show": true
         }
       }
 
@@ -2933,7 +2980,7 @@
 ### 会员卡阶段评估列表 [GET] admin/evaluations/cardEvaluation
 + Parameters
   + cardId - 卡ID
-  + cardId=4（示例）
+  + filter[cardId]=4（示例）
 + Description
     + id - 评估ID
     + attendTimeBucket - 评估时间段
@@ -2985,6 +3032,10 @@
 + Parameters
   + cardId - 卡ID
   + cardId=4（示例）
+  + filter[userId]=22（示例）
+  + filter[realName]=小（示例）
+  + filter[phoneNumber]=18（示例）
+  + page[number]=1&page[size]=10
 + Description
     + id - 教练ID
     + realName - 教练名称
@@ -3639,6 +3690,7 @@
             "hasCard": false
         }
       }
+    
 
 ### 地区查询 [GET] /admin/regions
 + Parameters
@@ -3811,3 +3863,4 @@
             }
         ]
       }
+
